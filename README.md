@@ -1,5 +1,5 @@
 # SCADA-Project
-A small SCADA network that recevies and send information to remote devices from a control center. This project is part of the semester project for University of Idaho Supervisory Control and Critical Infrastructure Systems, Spring 2020 class.
+A small SCADA network that recevies and send information to remote devices from a control center. This project is part of the semester project for "University of Idaho, Supervisory Control and Critical Infrastructure Systems, Spring 2020" class.
 
 ## Arcitecture
 
