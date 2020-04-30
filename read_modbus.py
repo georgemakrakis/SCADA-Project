@@ -26,8 +26,10 @@ sock.connect(('localhost', 5020))
 # amount of coils written, in this case it is.
 # response = tcp.send_message(message, sock)
 
+# This one reads the Fahr. Cels. tuple
+# for i in range(2):
 for i in range(2):
-    message = tcp.read_holding_registers(slave_id=1, starting_address=i, quantity=1)
+    message = tcp.read_holding_registers(slave_id=1, starting_address=1, quantity=2)
 
     response = tcp.send_message(message, sock)
 

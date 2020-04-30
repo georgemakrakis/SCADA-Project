@@ -7,7 +7,8 @@ def produce_temperatures():
     fahrenheit = (int)(celsius*1.8+32)        
     print ("Fahrenheit: {0} Celsius: {1}".format(fahrenheit, celsius))
     # add a return here for the two temperatures
-    return fahrenheit, celsius
+    # return fahrenheit, celsius
+    return [fahrenheit,celsius]
 
 # seed(1)
 # while(True):
