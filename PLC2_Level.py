@@ -27,6 +27,8 @@ def updating_writer(a):
     address = 0x01
     values = context[slave_id].getValues(register, address, count=2)
     values = flow_level.read_levels()
+
+    # If the values entered by use exceed we maintain the lowest possible
     if(int(values[0]) > 100):
         values[0] = 100
     if(int(values[1]) < 20):
