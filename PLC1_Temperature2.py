@@ -24,12 +24,13 @@ app = get_server(TCPServer, ('localhost', 5020), RequestHandler)
 @app.route(slave_ids=[1], function_codes=[3, 4], addresses=list(range(0, 10)))
 def read_data_store(slave_id, function_code, address):
     """" Return value of address. """
-    data_store[0] = temperature.produce_temperatures()[0]
-    data_store[1] = temperature.produce_temperatures()[1]
+    temperatures = temperature.produce_temperatures()
+    data_store[address] = temperatures[address]
+    print(data_store[address])
     print('-' *10)
     return data_store[address]
 
-
+# Use this one to change the repsonse to Fahr., Cels., or both
 @app.route(slave_ids=[1], function_codes=[6, 16], addresses=list(range(0, 10)))
 def write_data_store(slave_id, function_code, address, value):
     """" Set value for address. """
