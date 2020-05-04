@@ -1,6 +1,8 @@
-from pymodbus.client.sync import ModbusTcpClient
+# from pymodbus.client.sync import ModbusTcpClient
+from pymodbus.client.sync import ModbusTlsClient
 
-client = ModbusTcpClient('127.0.0.1',5020)
+# client = ModbusTcpClient('127.0.0.1',5020)
+client = ModbusTlsClient('127.0.0.1',5020)
 
 client.connect()
 

@@ -9,7 +9,7 @@ from pymodbus.client.sync import ModbusTcpClient
 
 def read_levels():
     config = configparser.ConfigParser()
-    config.read('config.ini')
+    config.read('tank_values.ini')
     return [config['CURRENT']['HIGH'], config['CURRENT']['LOW']]
 
 if __name__ == "__main__":

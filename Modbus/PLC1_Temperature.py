@@ -1,11 +1,14 @@
 from pymodbus.server.asynchronous import StartTcpServer
+from pymodbus.server.sync import StartTlsServer, ModbusTlsServer, ModbusTcpServer
 from pymodbus.device import ModbusDeviceIdentification
 from pymodbus.datastore import ModbusSequentialDataBlock
 from pymodbus.datastore import ModbusSlaveContext, ModbusServerContext
-from pymodbus.transaction import ModbusRtuFramer, ModbusAsciiFramer
+from pymodbus.transaction import ModbusRtuFramer, ModbusAsciiFramer, ModbusTlsFramer
 
 import os, sys
 from twisted.internet.task import LoopingCall
+from twisted.internet import reactor
+import threading
 
 import logging
 logging.basicConfig()
@@ -23,14 +26,23 @@ def updating_writer(a):
     :param arguments: The input arguments to the call
     """
     log.debug("updating the context")
-    context = a[0]
+    # context = a[0]
+    # register = 4
+    # slave_id = 0x01
+    # address = 0x01
+    # values = context[slave_id].getValues(register, address, count=2)
+    # values = temperature.produce_temperatures()
+    # log.debug("new values: " + str(values))
+    # context[slave_id].setValues(register, address, values)
+
     register = 4
     slave_id = 0x01
     address = 0x01
-    values = context[slave_id].getValues(register, address, count=2)
+    contxt = a.context[slave_id]
+    values = contxt.getValues(register, address, count=2)
     values = temperature.produce_temperatures()
     log.debug("new values: " + str(values))
-    context[slave_id].setValues(register, address, values)
+    contxt.setValues(register, address, values)
 
 def run_server():
 
@@ -53,10 +65,23 @@ def run_server():
     identity.MajorMinorRevision = '2.3.0'
 
     time = 5  # 5 seconds delay
-    loop = LoopingCall(f=updating_writer, a=(context,))
-    loop.start(time, now=False) # initially delay by time
-    StartTcpServer(context, identity=identity, address=("localhost", 5020))
+    # loop = LoopingCall(f=updating_writer, a=(context,))
+    # loop.start(time, now=False) # initially delay by time
+    # StartTcpServer(context, identity=identity, address=("localhost", 5020))
+    # StartTlsServer(context, identity=identity, certfile="Modbus/PLC1.crt",
+    #              keyfile="Modbus/PLC1.key", address=("localhost", 5020))
+    # server = ModbusTcpServer(context, identity=identity,
+    #                         address=("localhost", 5020))
+    
+    server = ModbusTlsServer(context, framer=ModbusTlsFramer, identity=identity, certfile="Modbus/PLC1.crt",
+                 keyfile="Modbus/PLC1.key", address=("localhost", 5020))
 
+    t = threading.Thread(target=server.serve_forever, daemon=True)
+    t.start()
+    loop = LoopingCall(f=updating_writer, a=server)
+    loop.start(time, now=True)
+    reactor.run()
+              
 if __name__ == "__main__":
     run_server()
     
