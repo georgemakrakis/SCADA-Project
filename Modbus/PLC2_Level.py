@@ -24,7 +24,7 @@ def updating_writer(a):
     """
     log.debug("updating the context")
     context = a[0]
-    register = 3
+    register = 4
     slave_id = 0x01
     address = 0x01
     values = context[slave_id].getValues(register, address, count=2)
