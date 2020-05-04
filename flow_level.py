@@ -25,7 +25,7 @@ if __name__ == "__main__":
             'HIGH' : tank_level_high,
             'LOW' : tank_level_low
         }
-        with open('config.ini', 'w') as configfile:
+        with open('tank_values.ini', 'w') as configfile:
             config.write(configfile)
 
         print(read_levels())

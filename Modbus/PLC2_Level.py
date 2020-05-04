@@ -40,10 +40,17 @@ def updating_writer(a):
     values = flow_level.read_levels()
     values = list(map(int, values)) 
 
-    # If the values entered by use exceed we maintain the lowest possible
-    if(int(values[0]) > 100):
+    # TODO If out of bounds even occur, log the event
+    # if(int(values[0]) > 100 or int(values[1]) < 20):
+    #     values = contxt.getValues(register, address, count=3)
+    #     values[2] += 1
+    #     contxt.setValues(register, 0x03, values)
+
+
+    # If the values entered by the user are out of bounds, we maintain the lowest possible
+    if(int(values[0]) > 100  or int(values[0]) < 20):
         values[0] = 100
-    if(int(values[1]) < 20):
+    if(int(values[1]) < 20 or int(values[1]) > 100):
         values[1] = 20
 
     log.debug("new values: " + str(values))
@@ -56,8 +63,8 @@ def run_server():
     store = ModbusSlaveContext(
         di=ModbusSequentialDataBlock(0, [17]*100),
         co=ModbusSequentialDataBlock(0, [17]*100),
-        hr=ModbusSequentialDataBlock(0, [0]*100),
-        ir=ModbusSequentialDataBlock(0, [17]*100)) 
+        hr=ModbusSequentialDataBlock(0, [17]*100),
+        ir=ModbusSequentialDataBlock(0, [0]*100)) 
     
     context = ModbusServerContext(slaves=store, single=True)
 
