@@ -4,6 +4,7 @@ from pymodbus.datastore import ModbusSequentialDataBlock
 from pymodbus.datastore import ModbusSlaveContext, ModbusServerContext
 from pymodbus.transaction import ModbusRtuFramer, ModbusAsciiFramer
 
+import os, sys
 from twisted.internet.task import LoopingCall
 
 import logging
@@ -11,6 +12,7 @@ logging.basicConfig()
 log = logging.getLogger()
 log.setLevel(logging.DEBUG)
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import temperature
 
 def updating_writer(a):
