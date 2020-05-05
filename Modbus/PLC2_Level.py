@@ -81,8 +81,11 @@ def run_server():
     # loop.start(time, now=False) # initially delay by time
     # StartTcpServer(context, identity=identity, address=("localhost", 5021))
 
-    server = ModbusTlsServer(context, framer=ModbusTlsFramer, identity=identity, certfile="Modbus/PLC1.crt",
-                 keyfile="Modbus/PLC1.key", address=("localhost", 5020))
+    server = ModbusTcpServer(context, identity=identity,
+                             address=("0.0.0.0", 5020))
+    # server = ModbusTlsServer(context, framer=ModbusTlsFramer, identity=identity, certfile="Modbus/PLC2.crt",
+    #              keyfile="Modbus/PLC2.key", address=("0.0.0.0", 5020))
+
 
     t = threading.Thread(target=server.serve_forever, daemon=True)
     t.start()

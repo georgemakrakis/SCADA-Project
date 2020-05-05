@@ -1,0 +1,32 @@
+﻿<Window x:Class="HMI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HMI"
+        mc:Ignorable="d"
+        Title="HMI" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Margin="10">
+            <Label>
+                <StackPanel Orientation="Horizontal">
+                    <Image x:Name="TemperatureWarning" Source="https://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_red.png" Visibility="Hidden"/>
+                    <AccessText Text="System Temperature:"/>
+                </StackPanel>
+            </Label>
+            <Label x:Name="Fahrenheit"/>
+            <Label x:Name="Celsius"/>
+            <Button x:Name="ClearTemperature" Content="Clear"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Margin="10">
+            <Label Content="Tank Level:" />
+            <Label x:Name="High"/>
+            <Label x:Name="Low"/>
+            <Button x:Name="ClearLevel" Content="Clear"/>
+        </StackPanel>
+    </Grid>
+</Window>
