@@ -17,7 +17,7 @@ The equipment fot hsi project is fffairly simple. It comrise of two
 Raspberry Pi that will play the role of a PLC, a router used to create a 
 local network, and a laptop that will host the HMI.
 
-![alt text](https://github.com/georgemakrakis/SCADA-Project/blob/master/images/Equipment.png?raw=true)
+![alt text](https://github.com/georgemakrakis/SCADA-Project/blob/master/images/Equipment.jpg?raw=true)
 
 ## Updates
 
