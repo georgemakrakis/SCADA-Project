@@ -14,7 +14,7 @@ pylint==2.4.4
 pymodbus==2.3.0
 pyserial==3.4
 six==1.14.0
-Twisted==22.2.0
+Twisted==22.10.0
 typed-ast==1.4.1
 uModbus==1.0.3
 wrapt==1.11.2
